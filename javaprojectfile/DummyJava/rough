@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+class GameController {
+    // Existing code...
+
+    public void startGame() {
+        // Existing code...
+
+        // Create a thread for game logic
+        Thread logicThread = new Thread(() -> {
+            while (true) {
+                // Game logic implementation
+                // Existing code...
+
+                // Wait for a short duration before the next round
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Create a thread for updating the game display
+        Thread displayThread = new Thread(() -> {
+            while (true) {
+                // Display game status implementation
+                // Existing code...
+
+                // Clear console
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+
+                // Wait for a short duration before updating the display again
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Start both threads
+        logicThread.start();
+        displayThread.start();
+
+        // Wait for the logic thread to finish (in case it ever finishes)
+        try {
+            logicThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Existing code...
+}
